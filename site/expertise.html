@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HR Expertise — Amy Castillo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="data.js"></script>
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="index.html"><i></i><span id="brand"></span></a>
+  <ul>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#consulting">Consulting</a></li>
+    <li><a href="index.html#expertise" style="color:var(--coral-deep)">Expertise</a></li>
+    <li><a href="index.html#travel">Travel</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</div></nav>
+
+<main class="wrap" data-screen-label="Expertise">
+  <div class="tabs" id="tabs"></div>
+  <div class="xhead">
+    <div class="sec-head" style="padding-top:8px"><span class="label">HR expertise</span><span class="num" id="x-num"></span></div>
+    <div><h1 id="x-title"></h1><p id="x-intro"></p></div>
+  </div>
+  <div id="x-projects"></div>
+  <div class="xtools">
+    <span class="label" style="padding-top:10px">Tools &amp; methods</span>
+    <div class="chips" id="x-tools"></div>
+  </div>
+  <div class="pager" id="pager"></div>
+</main>
+
+<footer id="contact"><div class="wrap">
+  <div class="sec" style="border:0">
+    <div class="sec-head"><span class="label">Contact</span></div>
+    <div><h2><a id="f-email"></a></h2><div class="flinks" id="f-links"></div></div>
+  </div>
+  <div class="fine"><span id="f-name"></span><span id="f-year"></span></div>
+</div></footer>
+
+<script>
+const S = window.SITE, A = S.hrAreas, $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('brand').textContent = S.name;
+$('f-email').textContent = S.email; $('f-email').href = 'mailto:' + S.email;
+$('f-links').innerHTML = S.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('');
+$('f-name').textContent = S.name; $('f-year').textContent = '© ' + new Date().getFullYear();
+
+function render() {
+  const i = Math.max(0, A.findIndex(a => a.id === location.hash.slice(1)));
+  const a = A[i];
+  document.title = a.title + ' — ' + S.name;
+  $('tabs').innerHTML = A.map(x => `<a href="#${x.id}" aria-current="${x === a}">${esc(x.title)}</a>`).join('');
+  $('x-num').textContent = String(i + 1).padStart(2, '0') + ' / ' + String(A.length).padStart(2, '0');
+  $('x-title').textContent = a.title;
+  $('x-intro').textContent = a.intro;
+  $('x-projects').innerHTML = a.projects.map(p => `
+    <div class="proj">
+      <div class="metric">${p.metric ? esc(p.metric) + `<small>${esc(p.metricLabel || '')}</small>` : ''}</div>
+      <div class="where"><b>${esc(p.company)}</b><span class="yrs" style="font:600 13px Archivo;letter-spacing:.06em;color:var(--muted)">${esc(p.years)}</span></div>
+      <div><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></div>
+    </div>`).join('');
+  $('x-tools').innerHTML = (a.tools || []).map(t => `<span>${esc(t)}</span>`).join('');
+  const prev = A[(i - 1 + A.length) % A.length], next = A[(i + 1) % A.length];
+  $('pager').innerHTML = `<a href="#${prev.id}"><span class="label">← Previous</span>${esc(prev.title)}</a><a href="#${next.id}"><span class="label">Next →</span>${esc(next.title)}</a>`;
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', render);
+render();
+</script>
+</body>
+</html>
