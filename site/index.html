@@ -4,21 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Amy Castillo</title>
-<meta name="description" content="Amy Castillo — HR executive and founder of Amy Castillo Consulting. Experience, HR expertise, travel and interests.">
-<link rel="icon" type="image/png" href="logos/acc-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
 <script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
 <script src="data.js"></script>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <nav class="nav"><div class="wrap">
   <a class="brand" href="#top"><i></i><span id="brand"></span></a>
-  <ul>
+  <button class="menu-btn" aria-label="Menu" aria-expanded="false" onclick="const n=this.closest('.nav');const o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path class="m-open" d="M4 6h16M4 12h16M4 18h16"/><path class="m-close" d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <ul onclick="if(event.target.closest('a')){const n=this.closest('.nav');n.classList.remove('open');n.querySelector('.menu-btn').setAttribute('aria-expanded',false)}">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#consulting">Consulting</a></li>
@@ -29,72 +27,75 @@
   </ul>
 </div></nav>
 
-<header id="top">
+<header id="top" data-screen-label="Hero">
   <div class="wrap">
-    <div class="hero">
+    <div class="hero" style="border-bottom:0">
       <div class="hero-text">
-        <div class="hero-name"><img src="logos/acc-mark.png" alt=""><h1 id="hero-name"></h1></div>
-        <div class="hero-sub">
+        
+        <div style="display:flex;align-items:center;gap:clamp(14px,1.6vw,22px)"><img src="logos/acc-mark.png" alt="" style="width:clamp(40px,5.2vw,68px);height:auto;flex:none;display:block"><h1 id="hero-name"></h1></div>
+        <div style="display:flex;flex-direction:column;gap:16px">
           <div class="rule"></div>
           <p id="hero-tagline"></p>
         </div>
       </div>
-      <div class="photo"><img id="headshot" alt="Portrait of Amy Castillo"></div>
+      <div class="photo">
+        <img id="headshot" alt="Portrait" onload="this.nextElementSibling.remove()" onerror="this.remove()">
+        <div class="ph label">Headshot</div>
+      </div>
     </div>
   </div>
-  <div class="stats-band">
+  <div style="border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);background:var(--blush)">
     <div class="wrap stats">
-      <div class="stat"><span class="label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>Companies</span><b id="s-co"></b></div>
-      <div class="stat"><span class="label"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>Countries visited</span><b id="s-ct"></b></div>
-      <div class="stat"><span class="label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>US states visited</span><b id="s-st"></b></div>
+      <div class="stat"><span class="label" style="display:flex;align-items:center;gap:10px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--coral-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>Companies</span><b id="s-co"></b></div>
+      <div class="stat"><span class="label" style="display:flex;align-items:center;gap:10px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--coral-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>Countries visited</span><b id="s-ct"></b></div>
+      <div class="stat"><span class="label" style="display:flex;align-items:center;gap:10px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--coral-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>US states visited</span><b id="s-st"></b></div>
     </div>
   </div>
 </header>
 
-<main>
-<section id="about"><div class="wrap sec">
+<section id="about" data-screen-label="About"><div class="wrap sec">
   <div class="sec-head"><span class="num">01</span><h2>About</h2></div>
   <div class="about" id="about-body"></div>
 </div></section>
 
-<section id="experience"><div class="wrap sec">
+<section id="experience" data-screen-label="Experience"><div class="wrap sec">
   <div class="sec-head"><span class="num">02</span><h2>Experience</h2></div>
-  <div class="companies" id="companies"></div>
+  <div class="grid-cells" id="companies"></div>
 </div></section>
 
-<section id="consulting" class="poster"><div class="wrap sec">
-  <div class="sec-head"><span class="num">03</span><span class="label" id="c-status"></span></div>
+<section id="consulting" class="poster" data-screen-label="Consulting"><div class="wrap sec">
+  <div class="sec-head"><span class="num" style="color:var(--ink)">03</span><span class="label" id="c-status"></span></div>
   <div>
-    <div class="c-logo-wrap" id="c-logo-wrap"><img id="c-logo" class="c-logo" alt="Amy Castillo Consulting"></div>
+    <div id="c-logo-wrap" style="background:var(--ink);display:inline-flex;padding:18px 22px;margin-bottom:28px"><img id="c-logo" class="c-logo" alt="Amy Castillo Consulting" style="margin:0" onerror="this.parentNode.remove()"></div>
     <h2 id="c-name"></h2>
     <p class="pitch" id="c-pitch"></p>
     <div class="svc" id="c-svc"></div>
     <div class="models" id="c-models"></div>
     <form class="notify" id="notify">
-      <input type="email" required placeholder="Your email" aria-label="Your email">
-      <button class="btn" type="submit">Notify me <span aria-hidden="true">→</span></button>
+      <input type="email" required placeholder="Your email" aria-label="Email">
+      <button class="btn" type="submit">Notify me <span>→</span></button>
     </form>
   </div>
 </div></section>
 
-<section id="expertise"><div class="wrap sec">
-  <div class="sec-head"><span class="num">04</span><h2>HR expertise</h2><p class="sec-note">Projects and results by HR function.</p></div>
+<section id="expertise" data-screen-label="Expertise"><div class="wrap sec">
+  <div class="sec-head"><span class="num">04</span><h2>HR expertise</h2><p style="color:var(--muted);font-size:15px">Projects and results by HR function.</p></div>
   <div class="grid-cells" id="xps"></div>
 </div></section>
 
-<section id="travel"><div class="wrap sec">
-  <div class="sec-head"><span class="num">05</span><h2>Travel</h2><p class="sec-note">A big part of my life. Updated after every trip.</p></div>
+<section id="travel" data-screen-label="Travel"><div class="wrap sec">
+  <div class="sec-head"><span class="num">05</span><h2>Travel</h2><p style="color:var(--muted);font-size:15px">A big part of my life. Updated after every trip.</p></div>
   <div>
     <div class="travel-top">
       <div class="seg" role="group" aria-label="Map">
-        <button type="button" data-view="world" aria-pressed="true">World</button>
-        <button type="button" data-view="us" aria-pressed="false">United States</button>
+        <button data-view="world" aria-pressed="true">World</button>
+        <button data-view="us" aria-pressed="false">United States</button>
       </div>
       <div class="count" id="t-count"></div>
     </div>
     <div class="mapbox" id="mapbox">
-      <svg id="map" viewBox="0 0 960 500" role="img" aria-label="Map of places visited"></svg>
-      <div class="legend"><span><i class="k-on"></i>Visited</span><span><i class="k-plan"></i>Planned</span><span><i class="k-off"></i>Not yet</span></div>
+      <svg id="map" viewBox="0 0 960 500" role="img" aria-label="Travel map"></svg>
+      <div class="legend"><span><i style="background:var(--coral)"></i>Visited</span><span><i style="background:#f4ae98"></i>Planned</span><span><i style="background:var(--land)"></i>Not yet</span></div>
       <div class="tip" id="tip"></div>
     </div>
     <ul class="visited" id="t-list"></ul>
@@ -102,100 +103,62 @@
   </div>
 </div></section>
 
-<section id="interests"><div class="wrap sec">
+<section id="interests" data-screen-label="Interests"><div class="wrap sec">
   <div class="sec-head"><span class="num">06</span><h2>Hobbies &amp; interests</h2></div>
   <div class="grid-cells" id="ints"></div>
 </div></section>
-</main>
 
-<footer id="contact"><div class="wrap">
-  <div class="sec">
-    <div class="sec-head"><span class="num">07</span><span class="label">Contact</span></div>
+<footer id="contact" data-screen-label="Contact"><div class="wrap">
+  <div class="sec" style="border:0">
+    <div class="sec-head"><span class="num" style="color:var(--coral)">07</span><span class="label">Contact</span></div>
     <div>
       <h2><a id="f-email"></a></h2>
       <div class="flinks" id="f-links"></div>
     </div>
   </div>
-  <img id="f-logo" class="f-logo" alt="Amy Castillo HR Consulting">
+  <img id="f-logo" alt="Amy Castillo HR Consulting" style="display:block;height:48px;width:auto;margin:0 0 28px" onerror="this.remove()">
   <div class="fine"><span id="f-name"></span><span id="f-year"></span></div>
 </div></footer>
 
 <script>
 const S = window.SITE, $ = id => document.getElementById(id);
-const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const norm = x => typeof x === 'string' ? { name: x, years: [] } : { years: [], ...x };
 const countries = S.travel.countries.map(norm), states = S.travel.states.map(norm);
 const pCountries = (S.travel.plannedCountries || []).map(norm), pStates = (S.travel.plannedStates || []).map(norm);
 
-// Replace a broken image with a fallback (or remove it) without inline handlers.
-const onBroken = (img, fallback) => img.addEventListener('error', () => fallback ? img.replaceWith(fallback()) : img.remove(), { once: true });
-
-/* ── Hero & stats ── */
 document.title = S.name;
 $('brand').textContent = S.name;
 $('hero-name').textContent = S.name;
 $('hero-tagline').textContent = S.tagline;
-const photo = document.querySelector('.photo');
-if (S.headshot) { onBroken($('headshot'), null); $('headshot').src = S.headshot; }
-else { photo.remove(); document.querySelector('.hero').classList.add('no-photo'); }
+if (S.headshot) $('headshot').src = S.headshot; else { document.querySelector('.photo').remove(); const ht = document.querySelector('.hero'); ht.style.gridTemplateColumns = '1fr'; document.querySelector('.hero-text').style.borderRight = '0'; }
 $('s-co').textContent = S.companies.length;
 $('s-ct').innerHTML = countries.length + ' <small>/ 195</small>';
 $('s-st').innerHTML = states.length + ' <small>/ 50</small>';
+$('about-body').innerHTML = S.about.map(p => `<p>${esc(p)}</p>`).join('') + `<div class="edu">` +
+  S.education.map(e => `<div><span class="label">Education</span>${e.logo ? `<span class="edu-logo"><img src="${esc(e.logo)}" alt="${esc(e.school)}" onerror="this.parentNode.remove()"></span>` : ''}<b>${esc(e.school)}</b><span>${esc(e.detail)}</span></div>`).join('') +
+  `<div><span class="label">Certifications</span><ul class="certs">${S.certifications.map(c => `<li><span class="cert-logo">${c.logo ? `<img src="${esc(c.logo)}" alt="" onerror="this.remove()">` : ''}</span><span>${esc(c.name)}</span></li>`).join('')}</ul></div></div>`;
 
-/* ── About ── */
-$('about-body').innerHTML = S.about.map(p => `<p>${esc(p)}</p>`).join('') +
-  `<div class="edu">` +
-  S.education.map(e => `<div><span class="label">Education</span>${e.logo ? `<span class="edu-logo"><img src="${esc(e.logo)}" alt="${esc(e.school)}"></span>` : ''}<b>${esc(e.school)}</b><span>${esc(e.detail)}</span></div>`).join('') +
-  `<div><span class="label">Certifications</span><ul class="certs">${S.certifications.map(c => `<li><span class="cert-logo">${c.logo ? `<img src="${esc(c.logo)}" alt="">` : ''}</span><span>${esc(c.name)}</span></li>`).join('')}</ul></div>` +
-  `</div>`;
-document.querySelectorAll('.edu-logo img').forEach(img => img.addEventListener('error', () => img.parentNode.remove(), { once: true }));
-document.querySelectorAll('.cert-logo img').forEach(img => onBroken(img, null));
-
-/* ── Experience ── */
-$('companies').innerHTML = S.companies.map((c, i) => `
-  <div class="co">
-    <div class="side">
-      <div class="logo${c.logoBox === 'large' ? ' big' : ''}">${c.logo ? `<img src="${esc(c.logo)}" alt="${esc(c.name)}" data-i="${i}">` : `<span class="wordmark">${esc(c.name)}</span>`}</div>
-      <h3>${esc(c.name)}</h3>
-      <div class="role">${esc(c.role)}</div>
-      <div class="yrs">${esc(c.years)}</div>
-      ${c.highlight ? `<p class="hl">${esc(c.highlight)}</p>` : ''}
-    </div>
-    <div class="roles">${(c.roles || []).map(r => `
-      <div>
-        <h4>${esc(r.title)}</h4>
-        <span class="yrs">${esc(r.years)}</span>
-        ${r.text ? `<p>${esc(r.text)}</p>` : ''}
-        ${r.points ? `<ul>${r.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
-      </div>`).join('')}
-    </div>
+const logoHTML = c => c.logo ? `<img src="${esc(c.logo)}" alt="${esc(c.name)}" onerror="this.outerHTML='<span class=wordmark>${esc(c.name).replace(/'/g,'&#39;')}</span>'">` : `<span class="wordmark">${esc(c.name)}</span>`;
+$('companies').innerHTML = S.companies.map(c => `
+  <div class="co wide">
+    <div class="side"><div class="logo${c.logoBox === 'large' ? ' big' : ''}${c.logoFit === 'cover' ? ' cover' : ''}">${logoHTML(c)}</div><h3>${esc(c.name)}</h3><div class="role">${esc(c.role)}</div><div class="yrs">${esc(c.years)}</div>${c.highlight ? `<p class="hl">${esc(c.highlight)}</p>` : ''}</div>
+    <div class="roles">${(c.roles || []).map(r => `<div><div><h4>${esc(r.title)}</h4><span class="yrs" style="display:block;margin-top:2px">${esc(r.years)}</span>${r.text ? `<p>${esc(r.text)}</p>` : ''}${r.points ? `<ul>${r.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}</div></div>`).join('')}</div>
   </div>`).join('');
-document.querySelectorAll('#companies .logo img').forEach(img => onBroken(img, () => {
-  const w = document.createElement('span'); w.className = 'wordmark'; w.textContent = S.companies[img.dataset.i].name; return w;
-}));
 
-/* ── Consulting ── */
-const C = S.consulting;
-$('c-status').textContent = C.status;
-$('c-name').textContent = C.name;
-$('c-pitch').textContent = C.pitch;
-$('c-svc').innerHTML = C.services.map(s => `<div>${esc(s)}</div>`).join('');
-$('c-models').innerHTML = (C.models || []).map(m => `<div><b>${esc(m.name)}</b><span>${esc(m.text)}</span></div>`).join('');
-if (C.logo) {
-  $('c-logo').addEventListener('error', () => $('c-logo-wrap').remove(), { once: true });
-  onBroken($('f-logo'), null);
-  $('c-logo').src = C.logo; $('f-logo').src = C.logo;
-} else { $('c-logo-wrap').remove(); $('f-logo').remove(); }
+$('c-status').textContent = S.consulting.status;
+$('c-name').textContent = S.consulting.name;
+$('c-pitch').textContent = S.consulting.pitch;
+$('c-svc').innerHTML = S.consulting.services.map(s => `<div>${esc(s)}</div>`).join('');
+if (S.consulting.logo) { $('c-logo').src = S.consulting.logo; $('f-logo').src = S.consulting.logo; } else { $('c-logo-wrap').remove(); $('f-logo').remove(); }
+$('c-models').innerHTML = (S.consulting.models || []).map(m => `<div><b>${esc(m.name)}</b><span>${esc(m.text)}</span></div>`).join('');
+$('xps').innerHTML = S.hrAreas.map((a, i) => `<a class="xp" href="expertise.html#${a.id}"><span class="n">${String(i + 1).padStart(2, '0')}</span><h3>${esc(a.title)}</h3><p>${a.projects.length} projects</p><span class="go">View <span>→</span></span></a>`).join('');
 $('notify').addEventListener('submit', e => {
   e.preventDefault();
   const from = e.target.querySelector('input').value;
-  location.href = `mailto:${S.email}?subject=${encodeURIComponent('Notify me: ' + C.name)}&body=${encodeURIComponent('Please add ' + from + ' to the launch list.')}`;
+  location.href = `mailto:${S.email}?subject=${encodeURIComponent('Notify me: ' + S.consulting.name)}&body=${encodeURIComponent('Please add ' + from + ' to the launch list.')}`;
 });
 
-/* ── HR expertise ── */
-$('xps').innerHTML = S.hrAreas.map((a, i) => `<a class="xp" href="expertise.html#${esc(a.id)}"><span class="n">${String(i + 1).padStart(2, '0')}</span><h3>${esc(a.title)}</h3><p>${a.projects.length} projects</p><span class="go">View <span aria-hidden="true">→</span></span></a>`).join('');
-
-/* ── Interests ── */
 const ICONS = {
   plane: '<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>',
   utensils: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
@@ -203,43 +166,40 @@ const ICONS = {
   book: '<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
   dumbbell: '<path d="M14.4 14.4 9.6 9.6"/><path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z"/><path d="m21.5 21.5-1.4-1.4"/><path d="M3.9 3.9 2.5 2.5"/><path d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z"/>'
 };
-$('ints').innerHTML = S.interests.map(it => `
-  <div class="int"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[it.icon] || ''}</svg><h3>${esc(it.title)}</h3><p>${esc(it.text)}</p></div>`).join('');
+$('ints').innerHTML = S.interests.map((it, i) => `
+  <div class="int"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--coral-deep)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[it.icon] || ''}</svg><h3>${esc(it.title)}</h3><p>${esc(it.text)}</p></div>`).join('');
 
-/* ── Footer ── */
 $('f-email').textContent = S.email; $('f-email').href = 'mailto:' + S.email;
 $('f-links').innerHTML = S.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('');
 $('f-name').textContent = S.name; $('f-year').textContent = '© ' + new Date().getFullYear();
 
 /* ── Travel map ── */
 const ALIAS = {
-  'united states': 'united states of america', 'usa': 'united states of america', 'us': 'united states of america',
-  'uk': 'united kingdom', 'england': 'united kingdom', 'scotland': 'united kingdom', 'wales': 'united kingdom', 'great britain': 'united kingdom',
-  'czech republic': 'czechia', 'drc': 'dem. rep. congo', 'democratic republic of the congo': 'dem. rep. congo',
-  'bosnia and herzegovina': 'bosnia and herz.', 'bosnia': 'bosnia and herz.', 'dominican republic': 'dominican rep.',
-  'central african republic': 'central african rep.', 'south sudan': 's. sudan', 'ivory coast': "côte d'ivoire",
-  'tanzania & zanzibar': 'tanzania', 'zanzibar': 'tanzania', 'viet nam': 'vietnam', 'swaziland': 'eswatini', 'burma': 'myanmar', 'holland': 'netherlands', 'the netherlands': 'netherlands',
-  'uae': 'united arab emirates', 'korea': 'south korea', 'republic of korea': 'south korea', 'equatorial guinea': 'eq. guinea',
-  'solomon islands': 'solomon is.', 'falkland islands': 'falkland is.', 'western sahara': 'w. sahara', 'north macedonia': 'macedonia'
+  'united states':'united states of america','usa':'united states of america','us':'united states of america',
+  'uk':'united kingdom','england':'united kingdom','scotland':'united kingdom','wales':'united kingdom','great britain':'united kingdom',
+  'czech republic':'czechia','drc':'dem. rep. congo','democratic republic of the congo':'dem. rep. congo',
+  'bosnia and herzegovina':'bosnia and herz.','bosnia':'bosnia and herz.','dominican republic':'dominican rep.',
+  'central african republic':'central african rep.','south sudan':'s. sudan','ivory coast':"côte d'ivoire",
+  'tanzania & zanzibar':'tanzania','zanzibar':'tanzania','viet nam':'vietnam','swaziland':'eswatini','burma':'myanmar','holland':'netherlands','the netherlands':'netherlands',
+  'uae':'united arab emirates','korea':'south korea','republic of korea':'south korea','equatorial guinea':'eq. guinea',
+  'solomon islands':'solomon is.','falkland islands':'falkland is.','western sahara':'w. sahara','north macedonia':'macedonia'
 };
 const key = n => { const k = n.trim().toLowerCase(); return ALIAS[k] || k; };
-const W = 960, H = 500, tip = $('tip'), box = $('mapbox');
+const W = 960, H = 500, svg = d3.select('#map'), tip = $('tip'), box = $('mapbox');
 const geo = {};
 let view = 'world';
 
 const fmtYears = y => y.length ? y.join(', ') : '';
 function renderList() {
-  const world = view === 'world', arr = world ? countries : states;
-  $('t-count').innerHTML = arr.length + ` <small>/ ${world ? '195 countries' : '50 states'}</small>`;
+  const arr = view === 'world' ? countries : states;
+  $('t-count').innerHTML = arr.length + ` <small>/ ${view === 'world' ? 195 : 50} ${view === 'world' ? 'countries' : 'states'}</small>`;
   $('t-list').innerHTML = [...arr].sort((a, b) => a.name.localeCompare(b.name))
     .map(d => `<li>${esc(d.name)}<span>${esc(fmtYears(d.years))}</span></li>`).join('') +
-    (world ? pCountries : pStates).map(d => `<li class="plan">${esc(d.name)}<span>Planned</span></li>`).join('');
+    (view === 'world' ? pCountries : pStates).map(d => `<li style="color:var(--coral-deep)">${esc(d.name)}<span style="color:var(--coral-deep)">Planned</span></li>`).join('');
 }
 
 function draw() {
-  renderList();
   const g = geo[view]; if (!g) return;
-  const svg = d3.select('#map');
   const visited = new Map((view === 'world' ? countries : states).map(d => [key(d.name), d]));
   const planned = new Map((view === 'world' ? pCountries : pStates).map(d => [key(d.name), d]));
   const proj = (view === 'world' ? d3.geoNaturalEarth1() : d3.geoAlbersUsa()).fitExtent([[12, 12], [W - 12, H - 40]], g);
@@ -247,20 +207,19 @@ function draw() {
   svg.selectAll('*').remove();
   const found = new Set();
   svg.selectAll('path').data(g.features).join('path')
-    .attr('class', f => {
-      const k = key(f.properties.name);
-      if (visited.has(k)) { found.add(k); return 'geo on'; }
-      return planned.has(k) ? 'geo plan' : 'geo';
-    })
+    .attr('class', f => { const v = visited.has(key(f.properties.name)); if (v) found.add(key(f.properties.name)); return 'geo' + (v ? ' on' : planned.has(key(f.properties.name)) ? ' plan' : ''); })
     .attr('d', path)
     .on('mousemove', (e, f) => {
-      const r = box.getBoundingClientRect(), k = key(f.properties.name), v = visited.get(k);
-      tip.innerHTML = esc(f.properties.name) + (v ? `<em>Visited${v.years.length ? ' · ' + esc(fmtYears(v.years)) : ''}</em>` : planned.has(k) ? '<em>Planned</em>' : '');
+      const r = box.getBoundingClientRect(), v = visited.get(key(f.properties.name));
+      tip.innerHTML = esc(f.properties.name) + (v ? `<em>Visited${v.years.length ? ' · ' + esc(fmtYears(v.years)) : ''}</em>` : planned.has(key(f.properties.name)) ? '<em>Planned</em>' : '');
       tip.style.left = (e.clientX - r.left) + 'px'; tip.style.top = (e.clientY - r.top) + 'px'; tip.style.opacity = 1;
     })
-    .on('mouseleave', () => tip.style.opacity = 0);
+    .on('mouseleave', () => tip.style.opacity = 0)
+    .on('click', function (e, f) { d3.select(this).dispatch('mousemove', { detail: e }); });
   const missing = [...visited.keys()].filter(k => !found.has(k)).map(k => visited.get(k).name);
   $('t-note').textContent = missing.length ? `Too small to show at this scale (still counted): ${missing.join(', ')}.` : '';
+  if (missing.length) console.info('[travel] not on map:', missing);
+  renderList();
 }
 
 document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
@@ -269,22 +228,18 @@ document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click'
   draw();
 }));
 
+Promise.all([
+  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json'),
+  d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json')
+]).then(([w, u]) => {
+  const wf = topojson.feature(w, w.objects.countries);
+  wf.features = wf.features.filter(f => f.properties.name !== 'Antarctica');
+  geo.world = wf;
+  geo.us = topojson.feature(u, u.objects.states);
+  geo.us.features = geo.us.features.filter(f => f.properties.name !== 'District of Columbia');
+  draw();
+});
 renderList();
-if (window.d3 && window.topojson) {
-  Promise.all([
-    d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json'),
-    d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json')
-  ]).then(([w, u]) => {
-    const wf = topojson.feature(w, w.objects.countries);
-    wf.features = wf.features.filter(f => f.properties.name !== 'Antarctica');
-    geo.world = wf;
-    geo.us = topojson.feature(u, u.objects.states);
-    geo.us.features = geo.us.features.filter(f => f.properties.name !== 'District of Columbia');
-    draw();
-  }).catch(() => { $('t-note').textContent = 'The map could not load right now. The full list is below.'; });
-} else {
-  $('t-note').textContent = 'The map could not load right now. The full list is below.';
-}
 </script>
 </body>
 </html>

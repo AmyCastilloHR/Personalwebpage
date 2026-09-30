@@ -13,7 +13,8 @@
 
 <nav class="nav"><div class="wrap">
   <a class="brand" href="index.html"><i></i><span id="brand"></span></a>
-  <ul>
+  <button class="menu-btn" aria-label="Menu" aria-expanded="false" onclick="const n=this.closest('.nav');const o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path class="m-open" d="M4 6h16M4 12h16M4 18h16"/><path class="m-close" d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <ul onclick="if(event.target.closest('a')){const n=this.closest('.nav');n.classList.remove('open');n.querySelector('.menu-btn').setAttribute('aria-expanded',false)}">
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#experience">Experience</a></li>
     <li><a href="index.html#consulting">Consulting</a></li>
@@ -53,6 +54,7 @@ $('f-email').textContent = S.email; $('f-email').href = 'mailto:' + S.email;
 $('f-links').innerHTML = S.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('');
 $('f-name').textContent = S.name; $('f-year').textContent = '© ' + new Date().getFullYear();
 
+const alsoIn = p => (p.also && p.also.length) ? `<div class="also"><span>Also in</span>${p.also.map(id => { const t = A.find(x => x.id === id); return t ? `<a href="#${id}">${esc(t.title)}</a>` : ''; }).join('')}</div>` : '';
 function render() {
   const i = Math.max(0, A.findIndex(a => a.id === location.hash.slice(1)));
   const a = A[i];
@@ -61,12 +63,17 @@ function render() {
   $('x-num').textContent = String(i + 1).padStart(2, '0') + ' / ' + String(A.length).padStart(2, '0');
   $('x-title').textContent = a.title;
   $('x-intro').textContent = a.intro;
-  $('x-projects').innerHTML = a.projects.map(p => `
-    <div class="proj">
-      <div class="metric">${p.metric ? esc(p.metric) + `<small>${esc(p.metricLabel || '')}</small>` : ''}</div>
-      <div class="where"><b>${esc(p.company)}</b><span class="yrs" style="font:600 13px Archivo;letter-spacing:.06em;color:var(--muted)">${esc(p.years)}</span></div>
-      <div><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></div>
-    </div>`).join('');
+  const withN = a.projects.filter(p => p.metric), without = a.projects.filter(p => !p.metric);
+  $('x-projects').innerHTML =
+    (withN.length ? `<div class="xgroup"><div class="xgroup-head"><span class="label">Measurable results</span></div>
+      <div class="results">${withN.map(p => `
+        <div class="result">
+          <div class="metric">${esc(p.metric)}<small>${esc(p.metricLabel || '')}</small></div>
+          <div class="r-body"><span class="r-co">${esc(p.company)}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p>${alsoIn(p)}</div>
+        </div>`).join('')}</div></div>` : '') +
+    (without.length ? `<div class="xgroup"><div class="xgroup-head"><span class="label">Programs &amp; initiatives</span></div>
+      <div class="initiatives">${without.map(p => `
+        <div class="init"><span class="r-co">${esc(p.company)}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p>${alsoIn(p)}</div>`).join('')}</div></div>` : '');
   $('x-tools').innerHTML = (a.tools || []).map(t => `<span>${esc(t)}</span>`).join('');
   const prev = A[(i - 1 + A.length) % A.length], next = A[(i + 1) % A.length];
   $('pager').innerHTML = `<a href="#${prev.id}"><span class="label">← Previous</span>${esc(prev.title)}</a><a href="#${next.id}"><span class="label">Next →</span>${esc(next.title)}</a>`;
