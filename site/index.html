@@ -185,7 +185,7 @@ const ALIAS = {
   'solomon islands':'solomon is.','falkland islands':'falkland is.','western sahara':'w. sahara','north macedonia':'macedonia'
 };
 const key = n => { const k = n.trim().toLowerCase(); return ALIAS[k] || k; };
-const W = 960, H = 500, svg = d3.select('#map'), tip = $('tip'), box = $('mapbox');
+const W = 960, H = 500, svg = window.d3 ? d3.select('#map') : null, tip = $('tip'), box = $('mapbox');
 const geo = {};
 let view = 'world';
 
@@ -228,18 +228,21 @@ document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click'
   draw();
 }));
 
-Promise.all([
-  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json'),
-  d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json')
-]).then(([w, u]) => {
-  const wf = topojson.feature(w, w.objects.countries);
-  wf.features = wf.features.filter(f => f.properties.name !== 'Antarctica');
-  geo.world = wf;
-  geo.us = topojson.feature(u, u.objects.states);
-  geo.us.features = geo.us.features.filter(f => f.properties.name !== 'District of Columbia');
-  draw();
-});
+const mapFailed = () => { $('t-note').textContent = 'The map could not load right now. The full list is below.'; };
 renderList();
+if (window.d3 && window.topojson) {
+  Promise.all([
+    d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json'),
+    d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json')
+  ]).then(([w, u]) => {
+    const wf = topojson.feature(w, w.objects.countries);
+    wf.features = wf.features.filter(f => f.properties.name !== 'Antarctica');
+    geo.world = wf;
+    geo.us = topojson.feature(u, u.objects.states);
+    geo.us.features = geo.us.features.filter(f => f.properties.name !== 'District of Columbia');
+    draw();
+  }).catch(mapFailed);
+} else mapFailed();
 </script>
 </body>
 </html>
