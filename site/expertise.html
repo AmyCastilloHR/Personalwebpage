@@ -15,11 +15,10 @@
   <a class="brand" href="index.html"><i></i><span id="brand"></span></a>
   <button class="menu-btn" aria-label="Menu" aria-expanded="false" onclick="const n=this.closest('.nav');const o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path class="m-open" d="M4 6h16M4 12h16M4 18h16"/><path class="m-close" d="M6 6l12 12M18 6L6 18"/></svg></button>
   <ul onclick="if(event.target.closest('a')){const n=this.closest('.nav');n.classList.remove('open');n.querySelector('.menu-btn').setAttribute('aria-expanded',false)}">
-    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#results">Results</a></li>
     <li><a href="index.html#experience">Experience</a></li>
-    <li><a href="index.html#consulting">Consulting</a></li>
-    <li><a href="index.html#expertise" style="color:var(--coral-deep)">Expertise</a></li>
-    <li><a href="index.html#travel">Travel</a></li>
+    <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
 </div></nav>
@@ -30,31 +29,35 @@
     <div class="sec-head" style="padding-top:8px"><span class="label">HR expertise</span><span class="num" id="x-num"></span></div>
     <div><h1 id="x-title"></h1><p id="x-intro"></p></div>
   </div>
+  <div class="rel-offer" id="rel-offer"></div>
   <div id="x-projects"></div>
   <div class="xtools">
     <span class="label" style="padding-top:10px">Tools &amp; methods</span>
     <div class="chips" id="x-tools"></div>
   </div>
-  <div class="pager" id="pager"></div>
+  <div class="back"><a href="#" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">↑ Back to all expertise</a></div>
 </main>
 
-<footer id="contact"><div class="wrap">
-  <div class="sec" style="border:0">
-    <div class="sec-head"><span class="label">Contact</span></div>
-    <div><h2><a id="f-email"></a></h2><div class="flinks" id="f-links"></div></div>
-  </div>
-  <div class="fine"><span id="f-name"></span><span id="f-year"></span></div>
-</div></footer>
+
+<footer id="contact"></footer>
 
 <script>
 const S = window.SITE, A = S.hrAreas, $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 $('brand').textContent = S.name;
-$('f-email').textContent = S.email; $('f-email').href = 'mailto:' + S.email;
-$('f-links').innerHTML = S.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('');
-$('f-name').textContent = S.name; $('f-year').textContent = '© ' + new Date().getFullYear();
 
-const alsoIn = p => (p.also && p.also.length) ? `<div class="also"><span>Also in</span>${p.also.map(id => { const t = A.find(x => x.id === id); return t ? `<a href="#${id}">${esc(t.title)}</a>` : ''; }).join('')}</div>` : '';
+const bookHref = S.bookingUrl || `mailto:${S.email}?subject=${encodeURIComponent('20-minute conversation')}`;
+document.querySelectorAll('.book').forEach(a => { a.href = bookHref; if (S.bookingUrl) { a.target = '_blank'; a.rel = 'noopener'; } });
+const card = p => p.metric ? `
+  <div class="result">
+    <div class="metric">${esc(p.metric)}<small>${esc(p.metricLabel || '')}</small></div>
+    <div class="r-body"><span class="r-co">${esc(p.company)}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p>${p.link ? `<a class="xlink" href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.linkLabel || 'Details')} ↗</a>` : ''}</div>
+  </div>` : `<div class="result plain"><div class="r-body"><span class="r-co">${esc(p.company)}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></div></div>`;
+const item = p => {
+  if (p.see) { const t = A.find(x => x.id === p.see); return `<div class="init see"><span class="label">See also</span><a href="#${p.see}">${esc(p.title)} · ${esc(t ? t.title : '')} →</a></div>`; }
+  return `<div class="init"><span class="r-co">${esc(p.company)}</span>${p.metric ? `<div class="imetric">${esc(p.metric)}<small>${esc(p.metricLabel || '')}</small></div>` : ''}<h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></div>`;
+};
+const group = (label, items) => `<div class="xgroup"><div class="xgroup-head"><span class="label">${esc(label)}</span></div><div class="results big">${items.map(card).join('')}</div></div>`;
 function render() {
   const i = Math.max(0, A.findIndex(a => a.id === location.hash.slice(1)));
   const a = A[i];
@@ -63,24 +66,20 @@ function render() {
   $('x-num').textContent = String(i + 1).padStart(2, '0') + ' / ' + String(A.length).padStart(2, '0');
   $('x-title').textContent = a.title;
   $('x-intro').textContent = a.intro;
-  const withN = a.projects.filter(p => p.metric), without = a.projects.filter(p => !p.metric);
+  const o = S.offers.find(x => x.id === a.offer);
+  $('rel-offer').innerHTML = o ? `<span class="label">Related offer</span><a href="index.html#offer-${esc(o.id)}">${esc(o.title)} →</a>` : '';
+  $('rel-offer').style.display = o ? '' : 'none';
+  const more = a.more || [];
   $('x-projects').innerHTML =
-    (withN.length ? `<div class="xgroup"><div class="xgroup-head"><span class="label">Measurable results</span></div>
-      <div class="results">${withN.map(p => `
-        <div class="result">
-          <div class="metric">${esc(p.metric)}<small>${esc(p.metricLabel || '')}</small></div>
-          <div class="r-body"><span class="r-co">${esc(p.company)}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p>${alsoIn(p)}</div>
-        </div>`).join('')}</div></div>` : '') +
-    (without.length ? `<div class="xgroup"><div class="xgroup-head"><span class="label">Programs &amp; initiatives</span></div>
-      <div class="initiatives">${without.map(p => `
-        <div class="init"><span class="r-co">${esc(p.company)}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p>${alsoIn(p)}</div>`).join('')}</div></div>` : '');
+    (a.sections || []).map(s => group(s.title, s.items)).join('') +
+    ((a.top || []).length ? group(a.sections ? 'Key results' : 'Measurable results', a.top) : '') +
+    (more.length ? `<div class="xgroup"><div class="xgroup-head"><span class="label">More programs</span></div><div class="initiatives">${more.map(item).join('')}</div></div>` : '');
   $('x-tools').innerHTML = (a.tools || []).map(t => `<span>${esc(t)}</span>`).join('');
-  const prev = A[(i - 1 + A.length) % A.length], next = A[(i + 1) % A.length];
-  $('pager').innerHTML = `<a href="#${prev.id}"><span class="label">← Previous</span>${esc(prev.title)}</a><a href="#${next.id}"><span class="label">Next →</span>${esc(next.title)}</a>`;
   window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', render);
 render();
 </script>
+<script src="footer.js"></script>
 </body>
 </html>
