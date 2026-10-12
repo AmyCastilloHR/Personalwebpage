@@ -74,6 +74,7 @@
     <div class="about-text">
       <div id="about-body"></div>
       <div class="creds" id="creds"></div>
+      <a class="otc" href="personal.html"><span class="label">Off the clock</span><span class="otc-t" id="otc"></span><span class="otc-go">Travel map &amp; hobbies →</span></a>
     </div>
   </div>
 </div></section>
@@ -153,6 +154,7 @@ const creds = [
   ...S.education.map(e => ({ logo: e.logo, name: e.detail.replace(', Strategic Leadership / Strategy', '') + ', ' + e.school })),
   ...S.certifications
 ];
+$('otc').textContent = `${S.travel.countries.length} countries visited so far` + (S.interests.length ? ' · ' + S.interests.map(i => i.title).join(', ') : '');
 $('creds').innerHTML = `<span class="label">Education &amp; certifications</span><ul class="certs">${creds.map(c => `<li><span class="cert-logo">${c.logo ? `<img src="${esc(c.logo)}" alt="" onerror="this.remove()">` : ''}</span><span>${esc(c.name)}</span></li>`).join('')}</ul>`;
 
 </script>

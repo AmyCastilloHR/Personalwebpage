@@ -511,3 +511,8 @@ footer .flinks a{text-transform:none;letter-spacing:.02em}
 #services .offers-cta{white-space:nowrap}
 @media (max-width:560px){#services .offers-cta{white-space:normal}}
 .offer h3,.offer .o-row{box-sizing:border-box}
+
+.otc{display:grid;gap:6px;margin-top:32px;padding:20px 0 0;border-top:2px solid var(--ink,#201e1d);color:inherit;text-decoration:none}
+.otc-t{font-size:16px;line-height:1.5;text-wrap:pretty}
+.otc-go{font-weight:700;color:var(--coral-deep,#b8240e)}
+.otc:hover .otc-go{text-decoration:underline}

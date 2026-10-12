@@ -265,12 +265,13 @@ window.SITE = {
   ],
 
   interests: [
+    { icon: "heart", title: "Family", text: "Proud mom of a teenage son who runs cross-country and plays percussion in the marching band. Plus a wonderful partner, two stepdaughters, our dog Cocoa, and cats Brie & Cheddar." },
     { icon: "plane", title: "Travel", text: "Tracked on the map above — always planning the next one." },
     { icon: "utensils", title: "Food", text: "Exploring global cuisines." },
-    { icon: "design", title: "Design & Remodeling", text: "Designed luxury kitchen and bathroom remodels." },
+    { icon: "design", title: "Design", text: "Designed luxury kitchen and bathroom remodels." },
     { icon: "book", title: "Reading", text: "Historical fiction and sci-fi." },
     { icon: "dumbbell", title: "Fitness", text: "Orangetheory." },
-    { icon: "paw", title: "Pets", text: "One dog, two cats, plus fostering." },
+    { icon: "mountain", title: "Nature", text: "Trails, parks and time outdoors." },
     { icon: "theater", title: "Theater", text: "Broadway shows and movies." }
   ],
 
