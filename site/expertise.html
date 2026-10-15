@@ -26,7 +26,7 @@
 <main class="wrap" data-screen-label="Expertise">
   <div class="tabs" id="tabs"></div>
   <div class="xhead">
-    <div class="sec-head" style="padding-top:8px"><span class="label">HR expertise</span><span class="num" id="x-num"></span></div>
+    <div class="sec-head" style="padding-top:8px"><span class="label">HR expertise</span></div>
     <div><h1 id="x-title"></h1><p id="x-intro"></p></div>
   </div>
   <div class="rel-offer" id="rel-offer"></div>
@@ -63,7 +63,6 @@ function render() {
   const a = A[i];
   document.title = a.title + ' — ' + S.name;
   $('tabs').innerHTML = A.map(x => `<a href="#${x.id}" aria-current="${x === a}">${esc(x.title)}</a>`).join('');
-  $('x-num').textContent = String(i + 1).padStart(2, '0') + ' / ' + String(A.length).padStart(2, '0');
   $('x-title').textContent = a.title;
   $('x-intro').textContent = a.intro;
   const o = S.offers.find(x => x.id === a.offer);

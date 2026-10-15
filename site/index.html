@@ -45,7 +45,7 @@
 </header>
 
 <section id="services" data-screen-label="Services"><div class="wrap sec">
-  <div class="sec-head"><span class="num">01</span><h2>How I can help</h2></div>
+  <div class="sec-head"><h2>How I can help</h2></div>
   <div class="offers-wrap">
     <div class="offers" id="offers"></div>
     <a class="btn btn-lg book offers-cta" href="#contact">Book a 20-minute conversation <span>→</span></a>
@@ -53,22 +53,22 @@
 </div></section>
 
 <section id="results" data-screen-label="Results"><div class="wrap sec">
-  <div class="sec-head"><span class="num">02</span><h2>Selected results</h2><a href="#expertise" class="more">All results by HR area ↓</a></div>
+  <div class="sec-head"><h2>Selected results</h2><a href="#expertise" class="more">All results by HR area ↓</a></div>
   <div class="stories" id="cases"></div>
 </div></section>
 
 <section id="expertise" data-screen-label="Expertise"><div class="wrap sec">
-  <div class="sec-head"><span class="num">03</span><h2>HR expertise</h2><p style="color:var(--muted);font-size:15px">Results and programs in five HR areas.</p></div>
+  <div class="sec-head"><h2>HR expertise</h2><p style="color:var(--muted);font-size:15px">Results and programs in five HR areas.</p></div>
   <div class="xgrid" id="xgrid"></div>
 </div></section>
 
 <section id="experience" data-screen-label="Experience"><div class="wrap sec">
-  <div class="sec-head"><span class="num">04</span><h2>Experience</h2></div>
+  <div class="sec-head"><h2>Experience</h2></div>
   <div id="companies"></div>
 </div></section>
 
 <section id="about" data-screen-label="About"><div class="wrap sec">
-  <div class="sec-head"><span class="num">05</span><h2>About</h2></div>
+  <div class="sec-head"><h2>About</h2></div>
   <div class="about2">
     <div class="about-photo"><img id="headshot" alt="Amy Castillo" onerror="this.parentNode.remove()"></div>
     <div class="about-text">
@@ -97,7 +97,7 @@ $('proof').innerHTML = S.proof.map(p => `<div class="pf"><b>${esc(p.metric)}</b>
 
 $('offers').innerHTML = S.offers.map((o, i) => `
   <article class="offer" id="offer-${esc(o.id)}">
-    <div class="offer-top"><span class="n">${String(i + 1).padStart(2, '0')}</span>${o.format ? `<span class="fmt">${esc(o.format)}</span>` : ''}</div>
+    ${o.format ? `<div class="offer-top"><span class="fmt">${esc(o.format)}</span></div>` : ''}
     <h3>${esc(o.title)}</h3>
     <div class="o-row"><span class="label">Who it's for</span><p>${esc(o.who)}</p></div>
     <div class="o-row"><span class="label">What you get</span><ul>${o.gets.map(g => `<li>${esc(g)}</li>`).join('')}</ul></div>
@@ -117,7 +117,6 @@ alignOffers(); addEventListener('resize', alignOffers); document.fonts && docume
 $('cases').innerHTML = S.cases.map((c, i) => `
   <article class="story">
     <div class="story-m">
-      <span class="story-n">${String(i + 1).padStart(2, '0')}</span>
       <div class="story-big">${esc(c.metric)}</div>
       <span class="story-ml">${esc(c.metricLabel)}</span>
     </div>
