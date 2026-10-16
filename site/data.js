@@ -16,10 +16,10 @@ window.SITE = {
   ],
   offers: [
     { id: "ma", title: "M&A HR due diligence and integration", format: "",
-      who: "PE sponsors, corporate development teams and CEOs buying, selling or carving out an industrial business.",
+      who: "CHROs, SVPs of HR, PE sponsors, corporate development teams and CEOs buying, selling or carving out a business.",
       gets: ["HR due diligence", "Day 1 readiness", "Benefits and payroll stand-up", "Retention agreements", "Culture integration"] },
     { id: "fractional", title: "Fractional and interim HR leadership", format: "",
-      who: "Mid-market manufacturers without a senior HR leader, or between CHROs.",
+      who: "Companies of any size that need senior leadership in any area of HR, such as talent, rewards or employee relations. Includes covering a gap between hires.",
       gets: ["A senior HR leader a few days a month", "Or full time during a search or reorganization"] },
     { id: "investigations", title: "Independent executive investigations", format: "",
       who: "Boards, CEOs and general counsel facing a matter involving a senior leader.",
@@ -34,7 +34,7 @@ window.SITE = {
       problem: "As VP of HR and SHEQ, I owned a division-wide injury rate that had to come down.",
       did: "Shifted the division to proactive safety measures and ran the “Why I work safely” campaign.",
       result: "LTIFR down 68% and TRIFR down 45% since 2023, with three injury-free months in 2025." },
-    { tag: "M&A · Epiroc", metric: "60", metricLabel: "Day transition period",
+    { tag: "M&A · Epiroc", metric: "$760M", metricLabel: "STANLEY Infrastructure acquisition",
       problem: "Epiroc's $760M STANLEY Infrastructure acquisition (2024) brought in about 1,380 employees with a 60-day Transition Services Agreement.",
       did: "Led the stand-up of payroll and benefits, including a new 401(k), then led health plan harmonization and the 401(k) harmonization roadmap.",
       result: "Payroll and benefits live inside the 60 days; health plans harmonized for 2026." }
@@ -43,7 +43,7 @@ window.SITE = {
     { label: "LinkedIn", url: "https://www.linkedin.com/in/amycastilloHR/" }
   ],
 
-  headshot: "img/headshot.png",   // set to "" to hide your photo
+  headshot: "img/headshot-2026.png",   // set to "" to hide your photo
 
   countriesWorked: 20,   // "I've worked with teams in N countries." on the home page
   about: [

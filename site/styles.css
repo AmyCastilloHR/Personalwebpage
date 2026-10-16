@@ -493,7 +493,7 @@ footer .flinks a{text-transform:none;letter-spacing:.02em}
 .story:first-child{border-top:0;padding-top:8px}
 .story-m{display:flex;flex-direction:column;gap:10px}
 .story-n{font:700 13px Archivo;color:var(--muted);letter-spacing:.08em}
-.story-big{font:800 clamp(72px,10vw,148px)/.88 Archivo;letter-spacing:-.05em;color:var(--coral-deep)}
+.story-big{font:800 clamp(54px,7.5vw,111px)/.88 Archivo;letter-spacing:-.05em;color:var(--coral-deep)}
 .story-ml{font:600 13px/1.4 Archivo;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);max-width:28ch}
 .story-t{display:flex;flex-direction:column;gap:14px;padding-top:24px;max-width:60ch}
 .story-t p{margin:0;font-size:17px;line-height:1.55;text-wrap:pretty}
