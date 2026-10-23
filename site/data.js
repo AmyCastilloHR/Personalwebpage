@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────────────────────────
 window.SITE = {
   name: "Amy Castillo",
+  jobTitle: "HR Executive & Consultant",   // used consistently in AI/search markup
   tagline: "HR executive with 25 years leading people strategy across manufacturing, medical devices and semiconductors. Founder of Amy Castillo Consulting.",
   email: "amy@amycastillohr.com",
   bookingUrl: "https://cal.com/amycastillohr/20-min-meeting",
@@ -135,7 +136,7 @@ window.SITE = {
     ]
   },
 
-  // HR EXPERTISE — one page per function (expertise.html#id), in nav order.
+  // HR EXPERTISE — one page per function (expertise-<id>.html), in nav order.
   // offer: id of the matching home-page offer. sections: extra headed blocks shown first.
   // top: large stat cards (4–5 max). more: collapsed under "More programs".
   // see: an item whose full version lives on another page — shows as a short "See also" link.

@@ -36,6 +36,7 @@ h1,h2,h3,p{margin:0}
 
 /* sections */
 section{border-bottom:2px solid var(--ink)}
+main > section:last-child{border-bottom:0}
 .sec{display:grid;grid-template-columns:minmax(160px,2fr) minmax(0,10fr);gap:24px;padding-top:72px;padding-bottom:72px}
 .sec-head{display:flex;flex-direction:column;gap:14px}
 .sec-head .num{font:700 14px Archivo;color:var(--coral-deep)}
@@ -171,8 +172,8 @@ footer .label{color:var(--stone)}
 footer h2{font:800 clamp(34px,5vw,64px)/1 Archivo;letter-spacing:-.02em}
 footer a{color:#fff}
 footer a:hover{color:var(--coral)}
-.flinks{display:flex;flex-wrap:wrap;gap:0;margin-top:32px;border-top:2px solid #fff}
-.flinks a{padding:16px 28px 0 0;font:600 15px Archivo;letter-spacing:.06em;text-transform:uppercase}
+.flinks{display:flex;flex-wrap:wrap;align-items:baseline;gap:0;margin-top:32px;border-top:2px solid #fff}
+.flinks a{padding:16px 28px 0 0;font:600 15px/1.4 Archivo;letter-spacing:.06em;text-transform:uppercase}
 .fine{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:24px 0;border-top:1px solid #4a4744;font:500 12px Archivo;letter-spacing:.08em;text-transform:uppercase;color:var(--stone)}
 
 /* consulting extras */

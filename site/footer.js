@@ -16,7 +16,7 @@
         <div class="flinks"><a href="mailto:${esc(S.email)}">${esc(S.email)}</a>${li ? `<a href="${esc(li.url)}" target="_blank" rel="noopener">LinkedIn ↗</a>` : ''}</div>
       </div>
     </div>
-    ${S.consulting.logo ? `<img src="${esc(S.consulting.logo)}" alt="Amy Castillo HR Consulting" style="display:block;height:48px;width:auto;margin:0 0 28px" onerror="this.remove()">` : ''}
-    <div class="fine"><span>${esc(S.name)}</span>${personal ? '<a href="index.html" style="color:var(--stone)">← Back to consulting</a>' : '<a href="personal.html" style="color:var(--stone)">Beyond the work</a>'}<span>© ${new Date().getFullYear()}</span></div>
+    ${S.consulting.logo ? `<img src="${esc(S.consulting.logo)}" alt="${esc(S.consulting.name)}" style="display:block;height:48px;width:auto;margin:0 0 28px" onerror="this.remove()">` : ''}
+    <div class="fine"><span>${esc(S.name)}</span>${personal ? '<a href="index.html" style="color:var(--stone)">← Back to consulting</a>' : '<a href="personal.html" style="color:var(--stone)">Beyond the work</a>'}<a href="for-llms.html" style="color:var(--stone)">For AI assistants</a><span>© ${new Date().getFullYear()}</span></div>
   </div>`;
 })();
