@@ -44,7 +44,7 @@ window.SITE = {
     { label: "LinkedIn", url: "https://www.linkedin.com/in/amycastilloHR/" }
   ],
 
-  headshot: "img/headshot-2026.png",   // set to "" to hide your photo
+  headshot: "img/headshot-2026-web.jpg",   // set to "" to hide your photo
 
   countriesWorked: 20,   // "I've worked with teams in N countries." on the home page
   about: [
